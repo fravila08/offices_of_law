@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
@@ -63,4 +64,59 @@ def curr_user(request):
 def log_out(request):
     logout(request)
     return HttpResponse('Logged Out')
+
+
+@api_view(["GET"])
+def all_categories(request):
+    my_categories= Categories.objects.all().values()
+    return Response({"categories":my_categories})
         
+        
+@api_view(["POST"])
+def new_cat(request):
+    title=request.data['title']
+    category=Categories.objects.create(title=title)
+    category.save()
+    return JsonResponse({"success":True})
+
+@api_view(["PUT", "DELETE"])
+def update_category(request, id):
+    category=Categories.objects.get(id=id)
+    if request.method == 'PUT':
+        title=request.data["update_title"]
+        category.title = title
+        category.save()
+        return Response({"success":True})
+    if request.method== "DELETE":
+        category.delete()
+        return Response({"success":True})
+    
+    
+@api_view(["POST"])
+def new_post(request):
+    category=Categories.objects.get(id=request.data["category"])
+    title=request.data["title"]
+    content=request.data["content"]
+    post=Posts.objects.create(category=category, title=title, content=content)
+    post.save()
+    return Response({"success":True})
+
+@api_view(["GET"])
+def all_posts(request, id):
+    category=Categories.objects.get(id=id)
+    posts=Posts.objects.filter(category=category).values()
+    return Response({"posts":posts})
+
+
+
+@api_view(["PUT", "DELETE"])
+def update_post(request, id):
+    post=Posts.objects.get(id=id)
+    if request.method == 'PUT':
+        title=request.data["update_title"]
+        post.title = title
+        post.save()
+        return Response({"success":True})
+    if request.method== "DELETE":
+        post.delete()
+        return Response({"success":True})

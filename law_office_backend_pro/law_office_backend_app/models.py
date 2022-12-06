@@ -14,3 +14,12 @@ class AppUser(AbstractUser):
     )
     USERNAME_FIELD= 'email'
     REQUIRED_FIELDS= []
+    
+class Categories(models.Model):
+    title= models.CharField(max_length=250, null=False, default='unknown')
+    
+class Posts(models.Model):
+    title= models.CharField(max_length=250, null=False, default='unknown')
+    content=models.TextField(null=True)
+    category=models.ForeignKey(Categories, on_delete=models.CASCADE)
+    

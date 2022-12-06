@@ -9,6 +9,8 @@ import SignUp from './pages/Signup'
 import Banner from './components/Banner'
 import { useEffect } from 'react'
 import axios from 'axios'
+import Survey from './pages/Survey';
+import Posts from './pages/Posts';
 
 
 
@@ -36,6 +38,8 @@ function App() {
           <Route path='/' element={<Home user={user} />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/categories' element={<Survey />} />
+          <Route path='/categoris/:id' element={<Posts />} />
         </Routes>
       </Router>
     </div>
