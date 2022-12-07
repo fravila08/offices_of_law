@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import Survey from './pages/Survey';
 import Posts from './pages/Posts';
+import InfoForm from './pages/InfoForm';
 
 
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/categories' element={<Survey />} />
           <Route path='/categoris/:id' element={<Posts />} />
+          <Route path='/information' element={<InfoForm />} />
         </Routes>
       </Router>
     </div>

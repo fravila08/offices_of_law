@@ -36,6 +36,7 @@ function NavBar({user, setUser}) {
           <Nav className="me-auto"> 
             <Nav.Link href='#' onClick={signOut}>Log Out</Nav.Link>
             <Nav.Link href="/#/categories">Categories</Nav.Link>
+            <Nav.Link href="/#/information">My Information</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">About Us</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
